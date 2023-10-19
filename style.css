@@ -1,0 +1,39 @@
+body{
+    margin: 0px;
+    background-color: rgb(53, 53, 53);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+
+}
+.divs{
+    height: 400px;
+    width: 200px;
+    border: 10px inset black;
+    background-color: rgb(170, 170, 170);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    
+    
+}
+#miejsce{
+    width: 198px;
+    height: 300px;
+}
+#wow{
+    width: 198px;
+    height: 200px;
+}
+#body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+input{
+    margin:5px;
+}
+
+
