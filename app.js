@@ -5,6 +5,7 @@ async function getItems(){
             Authorization:`Basic ${btoa("Kajetan:kajtulasty12")}`
         }
     })
+    var regular = []
     const json = await data.json()
     console.log(json)
     const body = document.getElementById("body")
@@ -29,18 +30,23 @@ async function getItems(){
     zatw.innerHTML="ZATWIERDZ"
     
 
+for(let j in json){
     wzrost.addEventListener('click',()=>{
-        h4.innerHTML="Czy zwiększyć cenę o 10 zł?"
+        regular=parseInt(json[i].regular_price)+10
+        h2.innerHTML=regular+" zł"
+        // h4.innerHTML="Czy zwiększyć cenę o 10 zł?"
         zatw.addEventListener('click',()=>{
-            wzrostCen(json[i].id,json[i].regular_price)        
+            wzrostCen(json[i].id,regular)        
         })
         
     })
     if(json[i].price>10){
     minus.addEventListener('click',()=>{
-        h4.innerHTML="Czy zmiejszyć cenę o 10 zł?"
+        regular=parseInt(json[i].regular_price)-10
+        h2.innerHTML=regular+" zł"
+        // h4.innerHTML="Czy zmiejszyć cenę o 10 zł?"
         zatw.addEventListener('click',()=>{
-        minusCen(json[i].id,json[i].regular_price)
+        minusCen(json[i].id,regular)
         })
     })
 }else{
@@ -48,10 +54,7 @@ async function getItems(){
     minus.style.color = "red"
     minus.style.backgroundColor = "rgb(39, 39, 39)"
 }
-zatw.addEventListener('click',()=>{
-
-        
-})
+}
 
     div.appendChild(h1)
     div.appendChild(h2)
@@ -81,8 +84,8 @@ async function add(){
     window.alert("Dodano: "+nazwa)
     getItems()
 }
-async function wzrostCen(id,regular_price){
-    const data = await fetch(`http://localhost/kkwordpress/wp-json/wc/v3/products/${id}?regular_price=${parseInt(regular_price)+10}`,{
+async function wzrostCen(id,regular){
+    const data = await fetch(`http://localhost/kkwordpress/wp-json/wc/v3/products/${id}?regular_price=${parseInt(regular)}`,{
         method:"POST",
         headers:{
             Authorization:`Basic ${btoa("Kajetan:kajtulasty12")}`,
@@ -92,8 +95,8 @@ async function wzrostCen(id,regular_price){
     console.log(json)
     getItems()
 }
-async function minusCen(id,regular_price){
-    const data = await fetch(`http://localhost/kkwordpress/wp-json/wc/v3/products/${id}?regular_price=${parseInt(regular_price)-10}`,{
+async function minusCen(id,regular){
+    const data = await fetch(`http://localhost/kkwordpress/wp-json/wc/v3/products/${id}?regular_price=${parseInt(regular)}`,{
         method:"POST",
         headers:{
             Authorization:`Basic ${btoa("Kajetan:kajtulasty12")}`,
